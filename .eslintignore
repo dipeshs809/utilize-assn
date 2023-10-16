@@ -1,0 +1,7 @@
+node_modules
+scripts
+config
+build
+**/*.css
+**/*.scss
+**/*.svg
