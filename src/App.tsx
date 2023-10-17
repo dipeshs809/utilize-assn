@@ -11,13 +11,13 @@ import CreateOrder from "features/createOrder";
 import { gapi } from "gapi-script";
 import React, { useEffect } from "react";
 
-import secrets from "./env/googleAuth.json";
+const clientId = process.env.REACT_APP_CLIENT_ID;
 
 function App() {
   useEffect(() => {
     function start() {
       gapi.client.init({
-        clientId: secrets.web.client_id,
+        clientId: clientId,
         scope: "",
       });
     }

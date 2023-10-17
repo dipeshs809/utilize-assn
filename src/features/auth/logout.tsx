@@ -3,7 +3,7 @@ import { logout } from "app/slice/auth";
 import React from "react";
 import { GoogleLogout } from "react-google-login";
 
-import secrets from "../../env/googleAuth.json";
+const clientId = process.env.REACT_APP_CLIENT_ID;
 
 const Logout = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +13,7 @@ const Logout = () => {
   return (
     <div id="signOutButton">
       <GoogleLogout
-        clientId={secrets.web.client_id}
+        clientId={clientId as string}
         buttonText="Logout"
         onLogoutSuccess={handleSuccess}
       />

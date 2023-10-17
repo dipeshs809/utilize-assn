@@ -3,7 +3,7 @@ import { login } from "app/slice/auth";
 import React from "react";
 import { GoogleLogin, GoogleLoginResponse } from "react-google-login";
 
-import secrets from "../../env/googleAuth.json";
+const clientId = process.env.REACT_APP_CLIENT_ID;
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ const Login = () => {
   return (
     <div id="signInButton">
       <GoogleLogin
-        clientId={secrets.web.client_id}
+        clientId={clientId as string}
         buttonText="Login"
         onSuccess={(response) => handleSuccess(response as GoogleLoginResponse)}
         onFailure={handleFailure}
