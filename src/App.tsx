@@ -1,12 +1,16 @@
 import "./App.css";
 
-import Counter from "features/counter";
+import AppLayout from "components/appLayout";
+import CardList from "features/cardList";
+import CreateOrder from "features/createOrder";
 import React from "react";
 
 function App() {
   return (
     <div className="App">
-      <Counter />
+      <AppLayout />
+      <CreateOrder />
+      <CardList />
     </div>
   );
 }

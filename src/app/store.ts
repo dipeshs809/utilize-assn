@@ -1,9 +1,9 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
-import counterSlice from "app/slice/exampleSlice";
+import createOrderModalSlice from "app/slice/createOrderModalSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterSlice,
+    modalState: createOrderModalSlice,
   },
 });
 
