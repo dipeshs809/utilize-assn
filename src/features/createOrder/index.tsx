@@ -1,18 +1,34 @@
 import { Button, Form, Input, Modal, Select, Space } from "antd";
+import { useForm } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { selectOpen, toggleModal } from "app/slice/createOrderModalSlice";
+import { createOrder } from "app/slice/manageOrders";
 import React from "react";
 
 import { emailRules, requiredRules } from "./rules";
+import { generateUid } from "./utils";
 const CreateOrder = () => {
+  const [form] = useForm();
   const dispatch = useAppDispatch();
   const open = useAppSelector(selectOpen);
   const handleToggleModal = () => {
     dispatch(toggleModal());
   };
   const handleSubmit = () => {
-    dispatch(toggleModal());
+    form
+      .validateFields()
+      .then((data) => {
+        const payload = {
+          ...data,
+          id: generateUid(),
+        };
+        dispatch(createOrder(payload));
+        dispatch(toggleModal());
+      })
+      .catch(() => {
+        alert("Could not Create order");
+      });
   };
   return (
     <div>
@@ -20,24 +36,27 @@ const CreateOrder = () => {
         title="Create Order"
         open={open}
         onCancel={handleToggleModal}
-        // onOk={handleToggleModal}
         destroyOnClose={true}
         footer={null}
       >
-        <Form>
-          <FormItem label="Customer Name" name="name" rules={requiredRules}>
-            <Input type="email" placeholder="Customer's name" />
+        <Form form={form}>
+          <FormItem
+            label="Customer Name"
+            name="customer_name"
+            rules={requiredRules}
+          >
+            <Input placeholder="Customer's name" />
           </FormItem>
-          <FormItem label="Email" name="email" rules={emailRules}>
+          <FormItem label="Email" name="customer_email" rules={emailRules}>
             <Input type="email" placeholder="Customer's email" />
           </FormItem>
           <FormItem label="Product" name="product" rules={requiredRules}>
             <Select
               placeholder="Select a product"
               options={[
-                { label: "Product 1", value: "product1" },
-                { label: "Product 2", value: "product2" },
-                { label: "Product 3", value: "product3" },
+                { label: "Product 1", value: "Product 1" },
+                { label: "Product 2", value: "Product 2" },
+                { label: "Product 3", value: "Product 3" },
               ]}
             />
           </FormItem>
