@@ -1,4 +1,5 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+import authSlice from "app/slice/auth";
 import createOrderModalSlice from "app/slice/createOrderModalSlice";
 import manageOrdersSlice from "app/slice/manageOrders";
 
@@ -6,6 +7,7 @@ export const store = configureStore({
   reducer: {
     modalState: createOrderModalSlice,
     manageOrders: manageOrdersSlice,
+    auth: authSlice,
   },
 });
 

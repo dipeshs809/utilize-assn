@@ -5,12 +5,25 @@ import { selectLogin } from "app/slice/auth";
 import { initializeState } from "app/slice/manageOrders";
 import { store } from "app/store";
 import AppLayout from "components/appLayout";
+import Login from "features/auth/login";
 import CardList from "features/cardList";
 import CreateOrder from "features/createOrder";
-import Login from "features/login";
-import React from "react";
+import { gapi } from "gapi-script";
+import React, { useEffect } from "react";
+
+import secrets from "./env/googleAuth.json";
 
 function App() {
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: secrets.web.client_id,
+        scope: "",
+      });
+    }
+
+    gapi.load("client:auth2", start);
+  }, []);
   store.dispatch(initializeState());
   const isUserLoggedIn = useAppSelector(selectLogin);
   return (

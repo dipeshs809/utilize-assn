@@ -1,0 +1,15 @@
+:local(.user) {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  img {
+    height: 30x;
+    width: 30px;
+    border-radius: 100%;
+  }
+  span {
+    font-weight: 500;
+    color: black;
+  }
+}

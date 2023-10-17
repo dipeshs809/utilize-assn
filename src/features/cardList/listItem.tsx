@@ -27,12 +27,10 @@ const ListItem: React.FC<OrderProps> = (props) => {
     form
       .validateFields()
       .then((data) => {
-        console.log(data);
         dispatch(editOrder(data));
         toggleEdit();
       })
       .catch((error) => {
-        console.log(error);
         alert("Please enter valid details.");
       });
   };
